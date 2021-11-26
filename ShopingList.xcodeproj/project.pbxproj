@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,13 @@
 		D5E1B3492751611D0022E100 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5E1B3472751611D0022E100 /* LaunchScreen.storyboard */; };
 		D5E1B3542751611D0022E100 /* ShopingListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E1B3532751611D0022E100 /* ShopingListTests.swift */; };
 		D5E1B35F2751611D0022E100 /* ShopingListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E1B35E2751611D0022E100 /* ShopingListUITests.swift */; };
+		D5E1B384275163020022E100 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E1B37E275163020022E100 /* WebService.swift */; };
+		D5E1B385275163020022E100 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E1B37F275163020022E100 /* Parser.swift */; };
+		D5E1B386275163020022E100 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E1B380275163020022E100 /* RequestManager.swift */; };
+		D5E1B387275163020022E100 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E1B381275163020022E100 /* ApiManager.swift */; };
+		D5E1B388275163020022E100 /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E1B382275163020022E100 /* ServiceProvider.swift */; };
+		D5E1B389275163020022E100 /* WebServiceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E1B383275163020022E100 /* WebServiceConfig.swift */; };
+		D5F94A83275164E9002FD461 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F94A82275164E8002FD461 /* Product.swift */; };
 		EF1F3AA7B97B1102AD6A9552 /* Pods_ShopingList.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70EC750FFB96A959C123EEA0 /* Pods_ShopingList.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +58,13 @@
 		D5E1B35A2751611D0022E100 /* ShopingListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShopingListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5E1B35E2751611D0022E100 /* ShopingListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopingListUITests.swift; sourceTree = "<group>"; };
 		D5E1B3602751611D0022E100 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D5E1B37E275163020022E100 /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		D5E1B37F275163020022E100 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		D5E1B380275163020022E100 /* RequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
+		D5E1B381275163020022E100 /* ApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
+		D5E1B382275163020022E100 /* ServiceProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
+		D5E1B383275163020022E100 /* WebServiceConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebServiceConfig.swift; sourceTree = "<group>"; };
+		D5F94A82275164E8002FD461 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,12 +126,14 @@
 		D5E1B33B2751611D0022E100 /* ShopingList */ = {
 			isa = PBXGroup;
 			children = (
-				D5E1B33C2751611D0022E100 /* AppDelegate.swift */,
+				D5E1B37A275162CF0022E100 /* Delegate */,
 				D5E1B3402751611D0022E100 /* ViewController.swift */,
 				D5E1B3422751611D0022E100 /* Main.storyboard */,
 				D5E1B3452751611D0022E100 /* Assets.xcassets */,
 				D5E1B3472751611D0022E100 /* LaunchScreen.storyboard */,
 				D5E1B34A2751611D0022E100 /* Info.plist */,
+				D5E1B38D2751630A0022E100 /* WebService */,
+				D5F94A82275164E8002FD461 /* Product.swift */,
 			);
 			path = ShopingList;
 			sourceTree = "<group>";
@@ -140,13 +156,33 @@
 			path = ShopingListUITests;
 			sourceTree = "<group>";
 		};
+		D5E1B37A275162CF0022E100 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				D5E1B33C2751611D0022E100 /* AppDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		D5E1B38D2751630A0022E100 /* WebService */ = {
+			isa = PBXGroup;
+			children = (
+				D5E1B381275163020022E100 /* ApiManager.swift */,
+				D5E1B37F275163020022E100 /* Parser.swift */,
+				D5E1B380275163020022E100 /* RequestManager.swift */,
+				D5E1B382275163020022E100 /* ServiceProvider.swift */,
+				D5E1B37E275163020022E100 /* WebService.swift */,
+				D5E1B383275163020022E100 /* WebServiceConfig.swift */,
+			);
+			path = WebService;
+			sourceTree = "<group>";
+		};
 		E971AD03FC958A1288424C54 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				B4B202E4E3926962B1A31681 /* Pods-ShopingList.debug.xcconfig */,
 				C0B8A01CC34668D653F35D49 /* Pods-ShopingList.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -324,7 +360,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5E1B386275163020022E100 /* RequestManager.swift in Sources */,
+				D5E1B385275163020022E100 /* Parser.swift in Sources */,
+				D5F94A83275164E9002FD461 /* Product.swift in Sources */,
+				D5E1B388275163020022E100 /* ServiceProvider.swift in Sources */,
+				D5E1B384275163020022E100 /* WebService.swift in Sources */,
 				D5E1B3412751611D0022E100 /* ViewController.swift in Sources */,
+				D5E1B387275163020022E100 /* ApiManager.swift in Sources */,
+				D5E1B389275163020022E100 /* WebServiceConfig.swift in Sources */,
 				D5E1B33D2751611D0022E100 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
