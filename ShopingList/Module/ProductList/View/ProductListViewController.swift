@@ -72,8 +72,11 @@ extension ProductListViewController{
     
     private func addCartButton(){
         
-        let cartButton = UIBarButtonItem(image: UIImage(named: "ic_cart"), style: .plain, target: self, action:#selector(addCartButtonTapped))
+        let image = UIImage(named: "ic_cart")
+        let cartButton = UIBarButtonItem(image:image, style: .plain, target: self, action:#selector(addCartButtonTapped))
+        self.navigationController?.navigationBar.tintColor = .black
         self.navigationItem.rightBarButtonItem  =  cartButton
+        
     }
     
     @objc private func addCartButtonTapped(){
