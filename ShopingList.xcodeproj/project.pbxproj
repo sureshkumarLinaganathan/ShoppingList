@@ -19,6 +19,8 @@
 		D53DEE672753A25700684EC9 /* CartListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53DEE662753A25700684EC9 /* CartListViewController.swift */; };
 		D53DEE742753A46F00684EC9 /* CartListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53DEE732753A46F00684EC9 /* CartListRouter.swift */; };
 		D53DEE7D2753A49800684EC9 /* CartListProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53DEE7C2753A49800684EC9 /* CartListProtocol.swift */; };
+		D53DEE8F2753B16100684EC9 /* CartListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53DEE8E2753B16100684EC9 /* CartListInteractor.swift */; };
+		D53DEE982753B19500684EC9 /* CartListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53DEE972753B19500684EC9 /* CartListPresenter.swift */; };
 		D5B436392753500100D1A2D9 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B436372753500100D1A2D9 /* ProductCollectionViewCell.swift */; };
 		D5B4363A2753500100D1A2D9 /* ProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5B436382753500100D1A2D9 /* ProductCollectionViewCell.xib */; };
 		D5E1B33D2751611D0022E100 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E1B33C2751611D0022E100 /* AppDelegate.swift */; };
@@ -71,6 +73,8 @@
 		D53DEE662753A25700684EC9 /* CartListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartListViewController.swift; sourceTree = "<group>"; };
 		D53DEE732753A46F00684EC9 /* CartListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartListRouter.swift; sourceTree = "<group>"; };
 		D53DEE7C2753A49800684EC9 /* CartListProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartListProtocol.swift; sourceTree = "<group>"; };
+		D53DEE8E2753B16100684EC9 /* CartListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartListInteractor.swift; sourceTree = "<group>"; };
+		D53DEE972753B19500684EC9 /* CartListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartListPresenter.swift; sourceTree = "<group>"; };
 		D5B436372753500100D1A2D9 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		D5B436382753500100D1A2D9 /* ProductCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductCollectionViewCell.xib; sourceTree = "<group>"; };
 		D5E1B3392751611D0022E100 /* ShopingList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShopingList.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -230,7 +234,9 @@
 			children = (
 				D53DEE6F2753A28900684EC9 /* View */,
 				D53DEE782753A48600684EC9 /* Router */,
+				D53DEE932753B16600684EC9 /* Interactor */,
 				D53DEE812753A4E900684EC9 /* Protocol */,
+				D53DEE9C2753B1A000684EC9 /* Presenter */,
 			);
 			path = Cart;
 			sourceTree = "<group>";
@@ -257,6 +263,22 @@
 				D53DEE7C2753A49800684EC9 /* CartListProtocol.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		D53DEE932753B16600684EC9 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				D53DEE8E2753B16100684EC9 /* CartListInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		D53DEE9C2753B1A000684EC9 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				D53DEE972753B19500684EC9 /* CartListPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		D56F23FF275350AD00852ADB /* Cell */ = {
@@ -547,11 +569,13 @@
 				D5096A6C2752A7F1004D26F3 /* ProductListPresenter.swift in Sources */,
 				D5E1B387275163020022E100 /* ApiManager.swift in Sources */,
 				D53DEE4F27535A1500684EC9 /* LoadingIndicator.swift in Sources */,
+				D53DEE982753B19500684EC9 /* CartListPresenter.swift in Sources */,
 				D53DEE742753A46F00684EC9 /* CartListRouter.swift in Sources */,
 				D5E1B389275163020022E100 /* WebServiceConfig.swift in Sources */,
 				D5096A672752A7D9004D26F3 /* ProductListInteractor.swift in Sources */,
 				D53DEE7D2753A49800684EC9 /* CartListProtocol.swift in Sources */,
 				D53DEE672753A25700684EC9 /* CartListViewController.swift in Sources */,
+				D53DEE8F2753B16100684EC9 /* CartListInteractor.swift in Sources */,
 				D5E1B33D2751611D0022E100 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

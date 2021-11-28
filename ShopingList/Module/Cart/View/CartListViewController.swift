@@ -11,6 +11,8 @@ class CartListViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var presenter:CartListViewToPresenterProtocol?
+
     var dataSource = [Product]()
     
     override func viewDidLoad() {
@@ -37,4 +39,21 @@ extension CartListViewController{
         
         self.title = "Cart List"
     }
+}
+
+extension CartListViewController:CartListPresenterToViewProtocol{
+    func showProductList(products: [Product]) {
+        
+    }
+    
+    func showErrorMessage(message: String) {
+        
+    }
+    
+    func sendAllDataReceivedStatus(status: Bool) {
+        
+    }
+    
+    
+    
 }
