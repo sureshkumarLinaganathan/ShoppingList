@@ -22,12 +22,14 @@ final class DataBaseManager:NSObject{
         return tempObj
     }
     
-    func fetchData<T>(forentity entityName:String,predicate:NSPredicate?)->Array<T>?{
+    func fetchData<T>(forentity entityName:String,predicate:NSPredicate?,limit:Int = 0,skip:Int = 0)->Array<T>?{
         
         let coreDataManager:CoreDataManager = DataBaseManager.sharedInstance.coreDataManager
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         fetchRequest.returnsObjectsAsFaults = false
         fetchRequest.predicate = predicate
+        fetchRequest.fetchLimit = limit
+        fetchRequest.fetchOffset = skip
         let tempObj:Array<T>? = coreDataManager.fetchData( withRequest: fetchRequest)
         return tempObj
     }
@@ -123,10 +125,10 @@ extension DataBaseManager{
 
 extension DataBaseManager{
     
-    func fetchCartListProduct()->[Product]{
+    func fetchCartListProduct(limit:Int,skip:Int)->[Product]{
         
         let predicate = NSPredicate(format:"isAddedToCart  == %d",true)
-        let arr:[CDProduct] = fetchData(forentity:"CDProduct", predicate:predicate)!
+        let arr:[CDProduct] = fetchData(forentity:"CDProduct", predicate:predicate,limit:limit,skip:skip)!
         var products = [Product]()
         for obj in arr{
             

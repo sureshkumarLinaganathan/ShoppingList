@@ -24,7 +24,7 @@ class ProductListInteractor:PresenterToInteractorProtocol{
         
         showLoadingIndicator(show:skip<limit)
         
-        self.serviceProvider?.fetchProducts(successCallback: { [weak self](success,response) in
+        self.serviceProvider?.fetchProducts(limit:limit, skip:skip,successCallback: { [weak self](success,response) in
             self?.hideLoadingIndicator(hide:skip<limit)
             guard let products = response as? [Product] else{
                 
@@ -32,10 +32,8 @@ class ProductListInteractor:PresenterToInteractorProtocol{
                 return
             }
             
-            let arr = self?.sliceProducts(products:products, skip:skip, limit:limit)
-            
-            self?.presenter?.sendAllDataReceivedStatus(status: (arr?.count == 0 || arr!.count<limit) ? true:false)
-            self?.presenter?.sendProducts(products:arr!)
+            self?.presenter?.sendAllDataReceivedStatus(status: (products.count == 0 || products.count<limit) ? true:false)
+            self?.presenter?.sendProducts(products:products)
             self?.saveProductInDatabase(products:products)
         }, failureCallback: { [weak self](message) in
             
@@ -45,19 +43,6 @@ class ProductListInteractor:PresenterToInteractorProtocol{
         })
     }
     
-    private func sliceProducts(products:[Product],skip:Int,limit:Int)->[Product]{
-        
-        let startValue = skip
-        let endValue = startValue+limit
-        
-        if products.count >= startValue {
-            
-            let arr = products[startValue..<min(products.count,endValue)]
-            return Array(arr)
-        }
-        return []
-        
-    }
 }
 
 extension ProductListInteractor{

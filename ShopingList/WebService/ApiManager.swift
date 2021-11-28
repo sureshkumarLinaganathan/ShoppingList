@@ -11,7 +11,7 @@ import Foundation
 class ApiManager {
     
     
-    class func fetchProducts(successCallback:@escaping successCallback,failureCallback:@escaping failureCallback){
+    class func fetchProducts(limit:Int,skip:Int,successCallback:@escaping successCallback,failureCallback:@escaping failureCallback){
         
         let (url,headers) = WebServiceConfig.getUrlWithHeaders(forActionType:.fetchMenu, forHeaderType:.basic, queryString:[:], apiType:.firstVersion,paths:nil)
         
@@ -35,10 +35,10 @@ class ApiManager {
                     return
                 }
                 
-                let objs = Parser.decode(data:arr, type:[Product].self)
-                // print(objs)
+                var  objs = Parser.decode(data:arr, type:[Product].self) as! [Product]
+                objs = sliceProducts(products:objs, skip:skip, limit:limit)
                 DispatchQueue.main.async {
-                    successCallback(success,objs)
+                    successCallback(success,objs as AnyObject)
                 }
                 
                 
@@ -55,5 +55,22 @@ class ApiManager {
         })
     }
     
+}
+
+extension ApiManager{
+    
+    private class func sliceProducts(products:[Product],skip:Int,limit:Int)->[Product]{
+        
+        let startValue = skip
+        let endValue = startValue+limit
+        
+        if products.count >= startValue {
+            
+            let arr = products[startValue..<min(products.count,endValue)]
+            return Array(arr)
+        }
+        return []
+        
+    }
 }
 

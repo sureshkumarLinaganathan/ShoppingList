@@ -7,7 +7,7 @@
 
 protocol ProductListServiceProviderProtocol {
     
-    func fetchProducts(successCallback:@escaping successCallback,failureCallback:@escaping failureCallback)
+    func fetchProducts(limit:Int,skip:Int,successCallback:@escaping successCallback,failureCallback:@escaping failureCallback)
 }
 
 
@@ -15,18 +15,18 @@ protocol ProductListServiceProviderProtocol {
 class  ServiceProvider:ProductListServiceProviderProtocol{
     
     
-    func fetchProducts(successCallback:@escaping successCallback,failureCallback:@escaping failureCallback){
+    func fetchProducts(limit:Int,skip:Int, successCallback:@escaping successCallback,failureCallback:@escaping failureCallback){
         
-        ApiManager.fetchProducts{ (success,response) in
-            successCallback(success,response)
-        } failureCallback: { (msg) in
-            failureCallback(msg)
+        ApiManager.fetchProducts(limit:limit, skip:skip) { (succes,response) in
+            
+            successCallback(succes,response)
+            
+        } failureCallback: { (message) in
+            
+            failureCallback(message)
         }
         
     }
-    
-    
-    
+
+
 }
-
-
