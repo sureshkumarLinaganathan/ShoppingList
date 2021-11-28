@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="LoadingIndicator" customModule="GitHub_App" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="356" height="182"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gTs-Gu-mnV">
+                    <rect key="frame" x="128" y="41" width="100" height="100"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="QKh-k8-AXM"/>
+                        <constraint firstAttribute="width" constant="100" id="gHI-Kh-uYF"/>
+                    </constraints>
+                </view>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="frR-xc-Wx3">
+                    <rect key="frame" x="153" y="66" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="0yL-jd-cJF"/>
+                        <constraint firstAttribute="height" constant="50" id="QRj-2N-QW9"/>
+                    </constraints>
+                    <color key="color" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </activityIndicatorView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="frR-xc-Wx3" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="GQD-EA-ftM"/>
+                <constraint firstItem="gTs-Gu-mnV" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="iMv-Jn-F6C"/>
+                <constraint firstItem="gTs-Gu-mnV" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="tys-B7-gEZ"/>
+                <constraint firstItem="frR-xc-Wx3" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="zRf-jt-Vz3"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="activityIndicator" destination="frR-xc-Wx3" id="zck-ZL-IVj"/>
+                <outlet property="parentView" destination="gTs-Gu-mnV" id="4wd-O9-nDT"/>
+            </connections>
+            <point key="canvasLocation" x="-4.3478260869565224" y="-153.34821428571428"/>
+        </view>
+    </objects>
+</document>

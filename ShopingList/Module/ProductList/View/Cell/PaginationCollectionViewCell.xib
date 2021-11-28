@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PaginationCellIdentifier" id="gTV-IL-0wX" customClass="PaginationCollectionViewCell" customModule="ShopingList" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="366" height="79"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="366" height="79"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="egx-6A-mHk">
+                        <rect key="frame" x="10" y="10" width="346" height="59"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="oro-iZ-67B">
+                                <rect key="frame" x="153" y="9.5" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="jtY-4v-VOV"/>
+                                    <constraint firstAttribute="height" constant="40" id="nRS-Cx-Rut"/>
+                                </constraints>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="oro-iZ-67B" firstAttribute="centerX" secondItem="egx-6A-mHk" secondAttribute="centerX" id="ojT-G4-Y3o"/>
+                            <constraint firstItem="oro-iZ-67B" firstAttribute="centerY" secondItem="egx-6A-mHk" secondAttribute="centerY" id="z4d-Hl-dRo"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="egx-6A-mHk" secondAttribute="bottom" constant="10" id="cGN-xp-kkT"/>
+                <constraint firstAttribute="trailing" secondItem="egx-6A-mHk" secondAttribute="trailing" constant="10" id="f0d-Pq-PhY"/>
+                <constraint firstItem="egx-6A-mHk" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="f6N-dx-vQB"/>
+                <constraint firstItem="egx-6A-mHk" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="y4l-ac-U9h"/>
+            </constraints>
+            <size key="customSize" width="366" height="79"/>
+            <connections>
+                <outlet property="activityIndicator" destination="oro-iZ-67B" id="Yjo-U7-6z1"/>
+                <outlet property="parentView" destination="egx-6A-mHk" id="GKF-50-Nq5"/>
+            </connections>
+            <point key="canvasLocation" x="6" y="69"/>
+        </collectionViewCell>
+    </objects>
+</document>

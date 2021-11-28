@@ -36,7 +36,7 @@ class ApiManager {
                 }
                 
                 let objs = Parser.decode(data:arr, type:[Product].self)
-                 print(objs)
+                // print(objs)
                 DispatchQueue.main.async {
                     successCallback(success,objs)
                 }

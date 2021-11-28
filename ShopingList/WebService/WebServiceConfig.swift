@@ -56,13 +56,13 @@ class WebServiceConfig {
         let headerDict = WebServiceConfig.requestHeaders(type: htype)
         var apiUrl = ApiUrl()
         var baseUrl = apiUrl.getBaseUrl(type: apiType)
-       
+        
         if let arrPaths = paths{
             baseUrl += createPath(array:arrPaths)
         }
         baseUrl += type.rawValue
         if queryString.count > 0{
-         baseUrl += WebServiceConfig.createQueryString(dict:queryString)
+            baseUrl += WebServiceConfig.createQueryString(dict:queryString)
         }
         return (baseUrl,headerDict)
     }
