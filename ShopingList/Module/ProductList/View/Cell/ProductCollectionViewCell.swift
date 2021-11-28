@@ -11,6 +11,8 @@ import SDWebImage
 class ProductCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "ProductListCellIdentifier"
+    static let height:CGFloat = 340
+    static let name = "ProductCollectionViewCell"
     
     
     @IBOutlet weak var parentView: UIView!

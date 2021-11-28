@@ -8,6 +8,14 @@
 import Foundation
 import UIKit
 
+protocol LoadingIndicatorProtocol{
+    
+    func showLoadingIndicator()
+    func hideLoadingIndicator()
+    
+}
+
+
 protocol PresenterToRouterProtocol: class {
     
     static func createModule()-> ProductListViewController
@@ -20,37 +28,31 @@ protocol ViewToPresenterProtocol: class{
     var view: PresenterToViewProtocol? {get set}
     var interactor: PresenterToInteractorProtocol? {get set}
     var router: PresenterToRouterProtocol? {get set}
-    var loadingIndicator:LoadingIndicatorProtocol? { get set}
     func fetchProduct(limit:Int,skip:Int)
     
 }
 
-protocol PresenterToViewProtocol: class{
+protocol PresenterToViewProtocol: class,LoadingIndicatorProtocol{
     
     func showProductList(products:[Product])
     func showErrorMessage(message:String)
+    func sendAllDataReceivedStatus(status:Bool)
 }
 
 protocol PresenterToInteractorProtocol: class {
     
     var presenter:InteractorToPresenterProtocol? {get set}
-    var loadingIndicator:LoadingIndicatorProtocol? { get set}
     func fetchProduct(limit:Int,skip:Int)
     
 }
 
-protocol InteractorToPresenterProtocol: class {
+protocol InteractorToPresenterProtocol: class,LoadingIndicatorProtocol {
     
     func sendProducts(products:[Product])
     func sendFailureMessage(message:String)
+    func sendAllDataReceivedStatus(status:Bool)
 }
 
-protocol LoadingIndicatorProtocol{
-    
-    func showLoadingIndicator()
-    func hideLoadingIndicator()
-    
-}
 
 
 

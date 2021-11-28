@@ -9,10 +9,9 @@ import Foundation
 
 class ProductListInteractor:PresenterToInteractorProtocol{
     
-    var presenter: InteractorToPresenterProtocol?
-    var loadingIndicator:LoadingIndicatorProtocol?
     
-    var serviceProvider:ProductListServiceProviderProtocol?
+    var presenter: InteractorToPresenterProtocol?
+    private var serviceProvider:ProductListServiceProviderProtocol?
     
     init(serviceProvider:ProductListServiceProviderProtocol = ServiceProvider()) {
         
@@ -34,12 +33,14 @@ class ProductListInteractor:PresenterToInteractorProtocol{
             
             let arr = self?.sliceProducts(products:products, skip:skip, limit:limit)
             
+            self?.presenter?.sendAllDataReceivedStatus(status: (arr?.count == 0 || arr!.count<limit) ? true:false)
             self?.presenter?.sendProducts(products:arr!)
             
         }, failureCallback: { [weak self](message) in
             
             self?.presenter?.sendFailureMessage(message:message)
             self?.hideLoadingIndicator(hide:skip<limit)
+            self?.presenter?.sendAllDataReceivedStatus(status: false)
         })
     }
     
@@ -48,16 +49,24 @@ class ProductListInteractor:PresenterToInteractorProtocol{
         let startValue = skip
         let endValue = startValue+limit
         
-        if products.count >= endValue{
-            
-            let arr = products[startValue..<endValue]
-            return Array(arr)
-        }else if products.count >= startValue {
-            
-            let arr = products[startValue..<products.count]
-            return Array(arr)
-        }
-        return []
+        if products.count >= startValue {
+           
+           let arr = products[startValue..<min(products.count,endValue)]
+           return Array(arr)
+       }
+       return []
+
+        
+//        if products.count >= endValue{
+//
+//            let arr = products[startValue..<endValue]
+//            return Array(arr)
+//        }else if products.count >= startValue {
+//
+//            let arr = products[startValue..<products.count]
+//            return Array(arr)
+//        }
+        
     }
 }
 
@@ -66,14 +75,14 @@ extension ProductListInteractor{
     private func showLoadingIndicator(show:Bool){
         
         if show{
-            self.loadingIndicator?.showLoadingIndicator()
+            self.presenter?.showLoadingIndicator()
         }
     }
     
     private func hideLoadingIndicator(hide:Bool){
         
         if hide {
-            self.loadingIndicator?.hideLoadingIndicator()
+            self.presenter?.hideLoadingIndicator()
         }
     }
     

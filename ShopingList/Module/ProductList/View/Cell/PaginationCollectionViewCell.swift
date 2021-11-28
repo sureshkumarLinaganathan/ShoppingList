@@ -13,6 +13,8 @@ class PaginationCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     static let identifier = "PaginationCellIdentifier"
+    static let height:CGFloat = 50
+    static let name = "PaginationCollectionViewCell"
     
     func setupView(){
         

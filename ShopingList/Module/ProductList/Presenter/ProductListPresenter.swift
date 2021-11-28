@@ -14,7 +14,6 @@ class ProductListPresenter:ViewToPresenterProtocol{
     var interactor: PresenterToInteractorProtocol?
     
     var router: PresenterToRouterProtocol?
-    var loadingIndicator:LoadingIndicatorProtocol?
     
     func fetchProduct(limit: Int, skip: Int) {
         
@@ -26,7 +25,10 @@ class ProductListPresenter:ViewToPresenterProtocol{
 }
 
 extension ProductListPresenter:InteractorToPresenterProtocol{
-    
+    func sendAllDataReceivedStatus(status: Bool) {
+        
+        view?.sendAllDataReceivedStatus(status:status)
+    }
     
     func sendProducts(products: [Product]) {
         
@@ -43,11 +45,11 @@ extension ProductListPresenter:LoadingIndicatorProtocol{
     
     func showLoadingIndicator() {
         
-        loadingIndicator?.showLoadingIndicator()
+        view?.showLoadingIndicator()
     }
     
     func hideLoadingIndicator() {
-        loadingIndicator?.hideLoadingIndicator()
+        view?.hideLoadingIndicator()
     }
     
     

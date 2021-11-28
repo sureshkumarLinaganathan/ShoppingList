@@ -23,8 +23,6 @@ class ProductListRouter:PresenterToRouterProtocol{
         presenter.router = router
         presenter.interactor = interactor
         interactor.presenter = presenter
-        presenter.loadingIndicator = view
-        interactor.loadingIndicator = presenter
         
         return view
         

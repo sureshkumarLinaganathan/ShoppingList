@@ -14,15 +14,13 @@ class ProductListViewController: UIViewController {
     var presentor:ViewToPresenterProtocol?
     private var loadingIndicator = LoadingIndicator()
     
-    private let limit = 10
+    private let pageSize = 10
     private var skip = 0
-    private let CELL_INSET:CGFloat = 10
-    var isPaginationServiceRunning = false
+    private let CELL_INSET = 10
+    private var isPaginationServiceRunning = false
+    private let numberOfColumns = 1
     
-    var isPaginationEnabled:Bool{
-        
-        return dataSources.count%limit == 0
-    }
+    var isAllDataReceived = false
     
     var dataSources = [Product](){
         
@@ -34,7 +32,7 @@ class ProductListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        fetchProductList(limit:limit, skip:skip)
+        fetchProductList(pageSize:pageSize, skip:skip)
     }
 }
 
@@ -49,8 +47,8 @@ extension ProductListViewController{
     
     private func addCell(){
         
-        collectionView.register(UINib(nibName:"ProductCollectionViewCell", bundle:nil), forCellWithReuseIdentifier:ProductCollectionViewCell.identifier)
-        collectionView.register(UINib(nibName: "PaginationCollectionViewCell", bundle:nil), forCellWithReuseIdentifier:PaginationCollectionViewCell.identifier)
+        collectionView.register(UINib(nibName:ProductCollectionViewCell.name, bundle:nil), forCellWithReuseIdentifier:ProductCollectionViewCell.identifier)
+        collectionView.register(UINib(nibName:PaginationCollectionViewCell.name, bundle:nil), forCellWithReuseIdentifier:PaginationCollectionViewCell.identifier)
     }
     
     private func setupLoadingIndicator(){
@@ -58,18 +56,6 @@ extension ProductListViewController{
         loadingIndicator = loadingIndicator.initWithView(view:self.view)
         self.view.addSubview(loadingIndicator)
     }
-}
-
-extension ProductListViewController{
-    
-    private func fetchProductList(limit:Int,skip:Int){
-        
-        presentor?.fetchProduct(limit:limit, skip:skip)
-    }
-}
-
-
-extension ProductListViewController{
     
     private func showAlert(message:String){
         
@@ -82,10 +68,18 @@ extension ProductListViewController{
     }
 }
 
+extension ProductListViewController{
+    
+    private func fetchProductList(pageSize:Int,skip:Int){
+        isPaginationServiceRunning = true
+        presentor?.fetchProduct(limit:pageSize, skip:skip)
+    }
+}
+
 extension ProductListViewController:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if dataSources.count > 0 && isPaginationEnabled{
+        if dataSources.count > 0 && !isAllDataReceived{
             return  dataSources.count+1
         }
         return dataSources.count
@@ -93,7 +87,7 @@ extension ProductListViewController:UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if indexPath.row == dataSources.count && isPaginationEnabled{
+        if indexPath.row == dataSources.count && !isAllDataReceived{
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier:PaginationCollectionViewCell.identifier, for:indexPath) as! PaginationCollectionViewCell
             cell.setupView()
@@ -101,8 +95,7 @@ extension ProductListViewController:UICollectionViewDataSource{
             
             if (!isPaginationServiceRunning){
                 
-                isPaginationServiceRunning = true
-                fetchProductList(limit:limit, skip:skip)
+                fetchProductList(pageSize:pageSize, skip:skip)
             }
             
             return cell
@@ -121,34 +114,45 @@ extension ProductListViewController:UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
         
-        if indexPath.row == dataSources.count && isPaginationEnabled{
+        let spacing = CGFloat((2 * CELL_INSET)/numberOfColumns)
+        
+        if indexPath.row == dataSources.count && !isAllDataReceived{
             
-            let cellSize = CGSize(width: (collectionView.bounds.width - (3 * CELL_INSET))/1, height:50)
+            let cellSize = CGSize(width: (collectionView.bounds.width - spacing), height:PaginationCollectionViewCell.height)
             return cellSize
             
         }else{
             
-            let cellSize = CGSize(width: (collectionView.bounds.width - (3 * CELL_INSET))/2, height:340)
+            let cellSize = CGSize(width: (collectionView.bounds.width - spacing), height:ProductCollectionViewCell.height)
             return cellSize
             
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat{
-        return CELL_INSET
+        
+        return CGFloat(CELL_INSET)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets{
-        let sectionInset = UIEdgeInsets(top: CELL_INSET, left: CELL_INSET, bottom: CELL_INSET, right: CELL_INSET)
+        
+        let inset = CGFloat(CELL_INSET)
+        let sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
         return sectionInset
     }
 }
 
 extension ProductListViewController:PresenterToViewProtocol{
     
+    func sendAllDataReceivedStatus(status: Bool) {
+        
+        isAllDataReceived = status
+    }
+    
+    
     func showProductList(products: [Product]) {
         
-        skip = skip+limit
+        skip = skip+pageSize
         isPaginationServiceRunning = false
         dataSources.append(contentsOf: products)
     }
