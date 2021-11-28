@@ -15,15 +15,18 @@ protocol LoadingIndicatorProtocol{
     
 }
 
+protocol TransitionProtocol{
+    func pushToCartScreen(navigationConroller:UINavigationController)
+}
 
-protocol PresenterToRouterProtocol: class {
+
+protocol PresenterToRouterProtocol: class,TransitionProtocol {
     
     static func createModule()-> ProductListViewController
-    func pushToMovieScreen(navigationConroller:UINavigationController)
     
 }
 
-protocol ViewToPresenterProtocol: class{
+protocol ViewToPresenterProtocol: class,TransitionProtocol{
     
     var view: PresenterToViewProtocol? {get set}
     var interactor: PresenterToInteractorProtocol? {get set}
@@ -52,6 +55,8 @@ protocol InteractorToPresenterProtocol: class,LoadingIndicatorProtocol {
     func sendFailureMessage(message:String)
     func sendAllDataReceivedStatus(status:Bool)
 }
+
+
 
 
 

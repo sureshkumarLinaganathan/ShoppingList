@@ -34,6 +34,7 @@ class ProductListViewController: UIViewController {
         setupView()
         fetchProductList(pageSize:pageSize, skip:skip)
     }
+    
 }
 
 
@@ -43,6 +44,8 @@ extension ProductListViewController{
         
         addCell()
         setupLoadingIndicator()
+        addCartButton()
+        setTitle()
     }
     
     private func addCell(){
@@ -65,6 +68,22 @@ extension ProductListViewController{
         }
         alertController.addAction(okayAction)
         self.present(alertController, animated:true, completion: nil)
+    }
+    
+    private func addCartButton(){
+        
+        let cartButton = UIBarButtonItem(image: UIImage(named: "ic_cart"), style: .plain, target: self, action:#selector(addCartButtonTapped))
+        self.navigationItem.rightBarButtonItem  =  cartButton
+    }
+    
+    @objc private func addCartButtonTapped(){
+        
+        presentor?.pushToCartScreen(navigationConroller:self.navigationController ?? UINavigationController())
+    }
+    
+    private func setTitle(){
+        
+        self.title = "Product List"
     }
 }
 

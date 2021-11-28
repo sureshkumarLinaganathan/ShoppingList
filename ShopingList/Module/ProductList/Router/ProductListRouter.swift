@@ -28,9 +28,10 @@ class ProductListRouter:PresenterToRouterProtocol{
         
     }
     
-    func pushToMovieScreen(navigationConroller: UINavigationController) {
+    func pushToCartScreen(navigationConroller: UINavigationController) {
         
-        
+        let view = CartRouter.createModule()
+        navigationConroller.pushViewController(view, animated:true)
     }
     
     static var mainstoryboard: UIStoryboard{

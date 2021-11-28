@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class ProductListPresenter:ViewToPresenterProtocol{
     
@@ -20,7 +21,10 @@ class ProductListPresenter:ViewToPresenterProtocol{
         interactor?.fetchProduct(limit:limit, skip:skip)
     }
     
-    
+    func pushToCartScreen(navigationConroller: UINavigationController) {
+        
+        router?.pushToCartScreen(navigationConroller:navigationConroller)
+    }
     
 }
 
