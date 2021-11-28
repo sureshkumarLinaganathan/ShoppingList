@@ -24,8 +24,8 @@
 		D53DEEA52753C80300684EC9 /* Database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D53DEEA12753C80300684EC9 /* Database.xcdatamodeld */; };
 		D53DEEAD2753C83800684EC9 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53DEEAB2753C83800684EC9 /* DataBaseManager.swift */; };
 		D53DEEAE2753C83800684EC9 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53DEEAC2753C83800684EC9 /* CoreDataManager.swift */; };
-		D53DEEBE2753C9EA00684EC9 /* CDProduct+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53DEEBC2753C9EA00684EC9 /* CDProduct+CoreDataClass.swift */; };
-		D53DEEBF2753C9EA00684EC9 /* CDProduct+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53DEEBD2753C9EA00684EC9 /* CDProduct+CoreDataProperties.swift */; };
+		D53DEEC82753D43700684EC9 /* CDProduct+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53DEEC62753D43700684EC9 /* CDProduct+CoreDataClass.swift */; };
+		D53DEEC92753D43700684EC9 /* CDProduct+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53DEEC72753D43700684EC9 /* CDProduct+CoreDataProperties.swift */; };
 		D5B436392753500100D1A2D9 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B436372753500100D1A2D9 /* ProductCollectionViewCell.swift */; };
 		D5B4363A2753500100D1A2D9 /* ProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5B436382753500100D1A2D9 /* ProductCollectionViewCell.xib */; };
 		D5E1B33D2751611D0022E100 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E1B33C2751611D0022E100 /* AppDelegate.swift */; };
@@ -83,8 +83,8 @@
 		D53DEEA22753C80300684EC9 /* Database.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Database.xcdatamodel; sourceTree = "<group>"; };
 		D53DEEAB2753C83800684EC9 /* DataBaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 		D53DEEAC2753C83800684EC9 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		D53DEEBC2753C9EA00684EC9 /* CDProduct+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDProduct+CoreDataClass.swift"; path = "/Users/sureshkumarlinganathan/Desktop/ShopingList/ShopingList/Database/CDProduct+CoreDataClass.swift"; sourceTree = "<absolute>"; };
-		D53DEEBD2753C9EA00684EC9 /* CDProduct+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CDProduct+CoreDataProperties.swift"; path = "/Users/sureshkumarlinganathan/Desktop/ShopingList/ShopingList/Database/CDProduct+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
+		D53DEEC62753D43700684EC9 /* CDProduct+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDProduct+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D53DEEC72753D43700684EC9 /* CDProduct+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDProduct+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D5B436372753500100D1A2D9 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		D5B436382753500100D1A2D9 /* ProductCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductCollectionViewCell.xib; sourceTree = "<group>"; };
 		D5E1B3392751611D0022E100 /* ShopingList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShopingList.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -294,8 +294,8 @@
 		D53DEEAA2753C80A00684EC9 /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				D53DEEBC2753C9EA00684EC9 /* CDProduct+CoreDataClass.swift */,
-				D53DEEBD2753C9EA00684EC9 /* CDProduct+CoreDataProperties.swift */,
+				D53DEEC62753D43700684EC9 /* CDProduct+CoreDataClass.swift */,
+				D53DEEC72753D43700684EC9 /* CDProduct+CoreDataProperties.swift */,
 				D53DEEAC2753C83800684EC9 /* CoreDataManager.swift */,
 				D53DEEAB2753C83800684EC9 /* DataBaseManager.swift */,
 				D53DEEA12753C80300684EC9 /* Database.xcdatamodeld */,
@@ -600,11 +600,11 @@
 				D5E1B389275163020022E100 /* WebServiceConfig.swift in Sources */,
 				D5096A672752A7D9004D26F3 /* ProductListInteractor.swift in Sources */,
 				D53DEE7D2753A49800684EC9 /* CartListProtocol.swift in Sources */,
-				D53DEEBE2753C9EA00684EC9 /* CDProduct+CoreDataClass.swift in Sources */,
+				D53DEEC82753D43700684EC9 /* CDProduct+CoreDataClass.swift in Sources */,
 				D53DEE672753A25700684EC9 /* CartListViewController.swift in Sources */,
 				D53DEE8F2753B16100684EC9 /* CartListInteractor.swift in Sources */,
 				D5E1B33D2751611D0022E100 /* AppDelegate.swift in Sources */,
-				D53DEEBF2753C9EA00684EC9 /* CDProduct+CoreDataProperties.swift in Sources */,
+				D53DEEC92753D43700684EC9 /* CDProduct+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

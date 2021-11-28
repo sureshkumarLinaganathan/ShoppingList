@@ -10,6 +10,8 @@ import UIKit
 
 class ProductListPresenter:ViewToPresenterProtocol{
     
+    
+    
     var view: PresenterToViewProtocol?
     
     var interactor: PresenterToInteractorProtocol?
@@ -24,6 +26,11 @@ class ProductListPresenter:ViewToPresenterProtocol{
     func pushToCartScreen(navigationConroller: UINavigationController) {
         
         router?.pushToCartScreen(navigationConroller:navigationConroller)
+    }
+    
+    func addProductToDatabase(product: Product) {
+        
+        interactor?.addProductToDatabase(product:product)
     }
     
 }

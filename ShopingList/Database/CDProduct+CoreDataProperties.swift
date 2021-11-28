@@ -1,6 +1,6 @@
 //
 //  CDProduct+CoreDataProperties.swift
-//  
+//  ShopingList
 //
 //  Created by Sureshkumar Linganathan on 28/11/21.
 //
@@ -21,5 +21,10 @@ extension CDProduct {
     @NSManaged public var name: String?
     @NSManaged public var price: String?
     @NSManaged public var prodDes: String?
+    @NSManaged public var isAddedToCart: Bool
+
+}
+
+extension CDProduct : Identifiable {
 
 }

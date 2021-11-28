@@ -196,3 +196,18 @@ extension ProductListViewController:LoadingIndicatorProtocol{
         
     }
 }
+
+extension ProductListViewController:ProductCollectionViewCellProtocol{
+    
+    func didTapCartButton(cell: ProductCollectionViewCell) {
+        
+        guard let indexPath = collectionView.indexPath(for:cell) else{
+            return
+        }
+        
+        var product = dataSources[indexPath.row ]
+        product.isAddedToCart = true
+        presentor?.addProductToDatabase(product:product)
+        
+    }
+}

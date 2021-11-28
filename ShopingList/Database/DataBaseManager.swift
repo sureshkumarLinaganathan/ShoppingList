@@ -89,29 +89,32 @@ final class DataBaseManager:NSObject{
 extension DataBaseManager{
     
     
-    func saveProduct(products:[Product]){
+    func saveProduct(product:Product){
         
-        for obj in products{
-            var arr:[CDProduct] = []
-            var product:CDProduct
-            if let idValue = obj.id {
-                let predicate = NSPredicate(format:"id  == %@",idValue)
-                arr = fetchData(forentity:"CDProduct", predicate:predicate)!
-            }
-            
-            if arr.count > 0{
-                product = arr[0]
-            }else{
-                product = createNewObject(forentity:"CDProduct") as! CDProduct
-            }
-            
-            product.id = obj.id
-            product.name = obj.name
-            product.prodDes = obj.description
-            product.price = obj.price
-            product.image = obj.image
-            coreDataManager.save()
+        
+        var arr:[CDProduct] = []
+        var obj:CDProduct
+        if let idValue = product.id {
+            let predicate = NSPredicate(format:"id  == %@",idValue)
+            arr = fetchData(forentity:"CDProduct", predicate:predicate)!
         }
+        
+        if arr.count > 0{
+            obj = arr[0]
+        }else{
+            obj = createNewObject(forentity:"CDProduct") as! CDProduct
+        }
+        
+        obj.id = product.id
+        obj.name =   product.name
+        obj.prodDes = product.description
+        obj.price = product.price
+        obj.image = product.image
+        if let isEnabled =  product.isAddedToCart{
+            obj.isAddedToCart = isEnabled
+        }
+        coreDataManager.save()
+        
         
         
         

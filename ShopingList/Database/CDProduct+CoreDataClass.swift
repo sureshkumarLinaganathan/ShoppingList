@@ -1,6 +1,6 @@
 //
 //  CDProduct+CoreDataClass.swift
-//  
+//  ShopingList
 //
 //  Created by Sureshkumar Linganathan on 28/11/21.
 //

@@ -15,6 +15,16 @@ protocol LoadingIndicatorProtocol{
     
 }
 
+protocol SaveProductToDatabaseProtocol {
+    
+    func addProductToDatabase(product:Product)
+}
+
+protocol FetchProductProtocol {
+    
+    func fetchProduct(limit:Int,skip:Int)
+}
+
 protocol TransitionProtocol{
     func pushToCartScreen(navigationConroller:UINavigationController)
 }
@@ -26,12 +36,12 @@ protocol PresenterToRouterProtocol: class,TransitionProtocol {
     
 }
 
-protocol ViewToPresenterProtocol: class,TransitionProtocol{
+protocol ViewToPresenterProtocol: class,TransitionProtocol,FetchProductProtocol,SaveProductToDatabaseProtocol{
     
     var view: PresenterToViewProtocol? {get set}
     var interactor: PresenterToInteractorProtocol? {get set}
     var router: PresenterToRouterProtocol? {get set}
-    func fetchProduct(limit:Int,skip:Int)
+   
     
 }
 
@@ -42,10 +52,9 @@ protocol PresenterToViewProtocol: class,LoadingIndicatorProtocol{
     func sendAllDataReceivedStatus(status:Bool)
 }
 
-protocol PresenterToInteractorProtocol: class {
+protocol PresenterToInteractorProtocol: class,FetchProductProtocol,SaveProductToDatabaseProtocol {
     
     var presenter:InteractorToPresenterProtocol? {get set}
-    func fetchProduct(limit:Int,skip:Int)
     
 }
 
@@ -55,6 +64,8 @@ protocol InteractorToPresenterProtocol: class,LoadingIndicatorProtocol {
     func sendFailureMessage(message:String)
     func sendAllDataReceivedStatus(status:Bool)
 }
+
+
 
 
 

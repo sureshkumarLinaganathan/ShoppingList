@@ -53,11 +53,23 @@
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWc-uh-3KB">
+                                <rect key="frame" x="288" y="10" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="lwT-dG-eQN"/>
+                                    <constraint firstAttribute="height" constant="35" id="tyZ-a2-P7l"/>
+                                </constraints>
+                                <state key="normal" image="ic_add_cart"/>
+                                <connections>
+                                    <action selector="addToCartButtonTapped:" destination="10A-BN-J8Z" eventType="touchUpInside" id="9zu-EZ-IAL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="WCW-hy-RRc" firstAttribute="leading" secondItem="o5Y-an-EPQ" secondAttribute="leading" constant="20" id="0j1-tW-BrW"/>
                             <constraint firstItem="Txg-nM-Frh" firstAttribute="centerX" secondItem="o5Y-an-EPQ" secondAttribute="centerX" id="AgA-4v-AeB"/>
+                            <constraint firstAttribute="trailing" secondItem="fWc-uh-3KB" secondAttribute="trailing" constant="10" id="JJt-5i-76B"/>
                             <constraint firstAttribute="bottom" secondItem="7KJ-Sx-cja" secondAttribute="bottom" constant="10" id="K0r-MD-08O"/>
                             <constraint firstItem="7KJ-Sx-cja" firstAttribute="trailing" secondItem="qa5-33-Gdh" secondAttribute="trailing" id="Mag-gq-Cfm"/>
                             <constraint firstAttribute="trailing" secondItem="WCW-hy-RRc" secondAttribute="trailing" constant="20" id="XeT-vG-M1H"/>
@@ -66,6 +78,7 @@
                             <constraint firstItem="WCW-hy-RRc" firstAttribute="top" secondItem="Txg-nM-Frh" secondAttribute="bottom" constant="10" id="ffV-QN-Hbg"/>
                             <constraint firstItem="Txg-nM-Frh" firstAttribute="top" secondItem="o5Y-an-EPQ" secondAttribute="top" constant="20" id="fm2-ZP-2sZ"/>
                             <constraint firstItem="7KJ-Sx-cja" firstAttribute="leading" secondItem="qa5-33-Gdh" secondAttribute="leading" id="g9b-ft-kCH"/>
+                            <constraint firstItem="fWc-uh-3KB" firstAttribute="top" secondItem="o5Y-an-EPQ" secondAttribute="top" constant="10" id="jR8-gF-ZwZ"/>
                             <constraint firstItem="qa5-33-Gdh" firstAttribute="trailing" secondItem="WCW-hy-RRc" secondAttribute="trailing" id="kZy-2f-yKx"/>
                             <constraint firstItem="qa5-33-Gdh" firstAttribute="leading" secondItem="WCW-hy-RRc" secondAttribute="leading" id="zl5-K3-Pe2"/>
                         </constraints>
@@ -82,6 +95,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <size key="customSize" width="353" height="261"/>
             <connections>
+                <outlet property="cartButton" destination="fWc-uh-3KB" id="ZR6-ai-HPP"/>
                 <outlet property="nameLabel" destination="WCW-hy-RRc" id="zHO-LM-vcH"/>
                 <outlet property="parentView" destination="o5Y-an-EPQ" id="76M-Rp-rFc"/>
                 <outlet property="priceLabel" destination="7KJ-Sx-cja" id="Vie-vE-slC"/>
@@ -92,6 +106,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="ic_add_cart" width="64" height="64"/>
         <image name="ic_profile" width="128" height="128"/>
     </resources>
 </document>

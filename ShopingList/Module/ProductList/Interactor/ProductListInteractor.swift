@@ -9,7 +9,6 @@ import Foundation
 
 class ProductListInteractor:PresenterToInteractorProtocol{
     
-    
     var presenter: InteractorToPresenterProtocol?
     private var serviceProvider:ProductListServiceProviderProtocol?
     
@@ -82,6 +81,14 @@ extension ProductListInteractor{
     
     private func saveProductInDatabase(products:[Product]){
         
-        DataBaseManager.sharedInstance.saveProduct(products:products)
+        for product in products{
+            
+            addProductToDatabase(product: product)
+        }
+    }
+    
+    func addProductToDatabase(product: Product) {
+        
+        DataBaseManager.sharedInstance.saveProduct(product:product)
     }
 }

@@ -3,11 +3,12 @@
     <entity name="CDProduct" representedClassName="CDProduct" syncable="YES">
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="image" optional="YES" attributeType="String"/>
+        <attribute name="isAddedToCart" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="price" optional="YES" attributeType="String"/>
         <attribute name="prodDes" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="CDProduct" positionX="-63" positionY="-18" width="128" height="104"/>
+        <element name="CDProduct" positionX="-63" positionY="-18" width="128" height="119"/>
     </elements>
 </model>

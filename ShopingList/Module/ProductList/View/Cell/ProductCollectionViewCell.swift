@@ -8,6 +8,12 @@
 import UIKit
 import SDWebImage
 
+
+protocol ProductCollectionViewCellProtocol:class{
+    
+    func didTapCartButton(cell:ProductCollectionViewCell)
+}
+
 class ProductCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "ProductListCellIdentifier"
@@ -20,6 +26,9 @@ class ProductCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var productDesLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var cartButton: UIButton!
+    
+    weak var delegate:ProductCollectionViewCellProtocol?
     
     func setupView(product:Product){
         
@@ -54,6 +63,11 @@ class ProductCollectionViewCell: UICollectionViewCell {
         }
         
         
+    }
+    
+    @IBAction func addToCartButtonTapped(_ sender: Any) {
+        
+        self.delegate?.didTapCartButton(cell:self)
     }
     
 }

@@ -14,4 +14,5 @@ struct Product:Codable{
     var image:String?
     var description:String?
     var price:String?
+    var isAddedToCart:Bool?
 }
