@@ -12,7 +12,7 @@ class CartListViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     var presenter:CartListViewToPresenterProtocol?
-
+    
     var dataSource = [Product]()
     
     override func viewDidLoad() {
@@ -42,6 +42,7 @@ extension CartListViewController{
 }
 
 extension CartListViewController:CartListPresenterToViewProtocol{
+    
     func showProductList(products: [Product]) {
         
     }
