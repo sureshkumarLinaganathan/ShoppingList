@@ -8,11 +8,11 @@
 import Foundation
 import UIKit
 
-class CartRouter:PresenterToRouterCartProtocol{
+class CartListRouter:CartListPresenterToRouterProtocol{
     
-    static func createModule() -> CartViewController {
+    static func createModule() -> CartListViewController {
         
-        let view = mainstoryboard.instantiateViewController(withIdentifier: "CartControllerID") as! CartViewController
+        let view = mainstoryboard.instantiateViewController(withIdentifier: "CartListControllerID") as! CartListViewController
         return view
     }
     

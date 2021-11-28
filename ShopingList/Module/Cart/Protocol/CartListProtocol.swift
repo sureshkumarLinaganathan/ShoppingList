@@ -7,8 +7,8 @@
 
 import Foundation
 
-protocol PresenterToRouterCartProtocol {
+protocol CartListPresenterToRouterProtocol {
     
-    static func createModule()->CartViewController
+    static func createModule()->CartListViewController
     
 }

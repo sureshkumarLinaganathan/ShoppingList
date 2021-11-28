@@ -50,10 +50,10 @@
             </objects>
             <point key="canvasLocation" x="33.75" y="-9.5070422535211261"/>
         </scene>
-        <!--Cart View Controller-->
+        <!--Cart List View Controller-->
         <scene sceneID="DUF-cq-Ix2">
             <objects>
-                <viewController storyboardIdentifier="CartControllerID" id="b8k-fa-mY3" customClass="CartViewController" customModule="ShopingList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CartListControllerID" id="b8k-fa-mY3" customClass="CartListViewController" customModule="ShopingList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cnx-06-9jk">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -68,10 +68,6 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="7Lt-92-Rnm"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Ce2-UA-3VN"/>
-                                </connections>
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lMb-8m-gwo"/>
@@ -83,6 +79,9 @@
                             <constraint firstAttribute="trailing" secondItem="DRh-TI-L3d" secondAttribute="trailing" id="ioU-0Y-jl0"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="DRh-TI-L3d" id="lZG-ao-b2g"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Q8-6c-luJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
