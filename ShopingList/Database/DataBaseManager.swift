@@ -85,3 +85,35 @@ final class DataBaseManager:NSObject{
         coreDataManager.deleteObject(Object:object)
     }
 }
+
+extension DataBaseManager{
+    
+    
+    func saveProduct(products:[Product]){
+        
+        for obj in products{
+            var arr:[CDProduct] = []
+            var product:CDProduct
+            if let idValue = obj.id {
+                let predicate = NSPredicate(format:"id  == %@",idValue)
+                arr = fetchData(forentity:"CDProduct", predicate:predicate)!
+            }
+            
+            if arr.count > 0{
+                product = arr[0]
+            }else{
+                product = createNewObject(forentity:"CDProduct") as! CDProduct
+            }
+            
+            product.id = obj.id
+            product.name = obj.name
+            product.prodDes = obj.description
+            product.price = obj.price
+            product.image = obj.image
+            coreDataManager.save()
+        }
+        
+        
+        
+    }
+}

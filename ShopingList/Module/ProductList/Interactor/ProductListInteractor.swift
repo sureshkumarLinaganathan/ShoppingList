@@ -35,7 +35,7 @@ class ProductListInteractor:PresenterToInteractorProtocol{
             
             self?.presenter?.sendAllDataReceivedStatus(status: (arr?.count == 0 || arr!.count<limit) ? true:false)
             self?.presenter?.sendProducts(products:arr!)
-            
+            self?.saveProductInDatabase(products:products)
         }, failureCallback: { [weak self](message) in
             
             self?.presenter?.sendFailureMessage(message:message)
@@ -50,22 +50,11 @@ class ProductListInteractor:PresenterToInteractorProtocol{
         let endValue = startValue+limit
         
         if products.count >= startValue {
-           
-           let arr = products[startValue..<min(products.count,endValue)]
-           return Array(arr)
-       }
-       return []
-
-        
-//        if products.count >= endValue{
-//
-//            let arr = products[startValue..<endValue]
-//            return Array(arr)
-//        }else if products.count >= startValue {
-//
-//            let arr = products[startValue..<products.count]
-//            return Array(arr)
-//        }
+            
+            let arr = products[startValue..<min(products.count,endValue)]
+            return Array(arr)
+        }
+        return []
         
     }
 }
@@ -86,4 +75,13 @@ extension ProductListInteractor{
         }
     }
     
+}
+
+
+extension ProductListInteractor{
+    
+    private func saveProductInDatabase(products:[Product]){
+        
+        DataBaseManager.sharedInstance.saveProduct(products:products)
+    }
 }
