@@ -12,7 +12,9 @@ class ProductListViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     var presentor:ViewToPresenterProtocol?
+    
     private var loadingIndicator = LoadingIndicator()
+    let refreshControl = UIRefreshControl()
     
     private let pageSize = 10
     private var skip = 0
@@ -21,7 +23,15 @@ class ProductListViewController: UIViewController {
     private let numberOfColumns = 1
     
     var isAllDataReceived = false
-    
+    var isRefreshingEnabled = false{
+        
+        willSet{
+            
+            if newValue == false{
+                endRefreshing()
+            }
+        }
+    }
     var dataSources = [Product](){
         
         didSet{
@@ -46,6 +56,7 @@ extension ProductListViewController{
         setupLoadingIndicator()
         addCartButton()
         setTitle()
+        addRefreshControl()
     }
     
     private func addCell(){
@@ -87,6 +98,25 @@ extension ProductListViewController{
     private func setTitle(){
         
         self.title = "Product List"
+    }
+    
+    private func addRefreshControl(){
+        
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(refreshView), for: .valueChanged)
+        collectionView.addSubview(refreshControl)
+    }
+    
+    @objc private func refreshView(){
+        
+        isRefreshingEnabled = true
+        fetchProductList(pageSize:pageSize, skip:skip)
+        
+    }
+    
+    private func endRefreshing(){
+        
+        refreshControl.endRefreshing()
     }
 }
 
@@ -179,6 +209,7 @@ extension ProductListViewController:PresenterToViewProtocol{
         skip = skip+pageSize
         isPaginationServiceRunning = false
         dataSources.append(contentsOf: products)
+        isRefreshingEnabled = false
     }
     
     func showErrorMessage(message: String) {
