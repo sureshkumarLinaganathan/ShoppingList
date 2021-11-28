@@ -14,13 +14,13 @@ class CartListRouter:CartListPresenterToRouterProtocol{
         
         let view = mainstoryboard.instantiateViewController(withIdentifier: "CartListControllerID") as! CartListViewController
         
-        let presenter: CartListViewToPresenterProtocol & CartListInteractorToPresenterProtocol = CartListPresenter()
-        let interactor: CartListPresenterToInteractorProtocol = CartListInteractor()
+        let presenter: ViewToPresenterProtocol & InteractorToPresenterProtocol = ProductListPresenter()
+        let interactor: PresenterToInteractorProtocol = ProductListInteractor()
         let router:CartListPresenterToRouterProtocol = CartListRouter()
         
         view.presenter = presenter
-        presenter.view = view
-        presenter.router = router
+        presenter.view = view 
+        presenter.cartRouter = router
         presenter.interactor = interactor
         interactor.presenter = presenter
         

@@ -11,12 +11,13 @@ import UIKit
 class ProductListPresenter:ViewToPresenterProtocol{
     
     
-    
     var view: PresenterToViewProtocol?
     
     var interactor: PresenterToInteractorProtocol?
     
     var router: PresenterToRouterProtocol?
+    
+    var cartRouter:CartListPresenterToRouterProtocol?
     
     func fetchProduct(limit: Int, skip: Int) {
         
@@ -66,3 +67,4 @@ extension ProductListPresenter:LoadingIndicatorProtocol{
     
     
 }
+

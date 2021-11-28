@@ -41,6 +41,7 @@ protocol ViewToPresenterProtocol: class,TransitionProtocol,FetchProductProtocol,
     var view: PresenterToViewProtocol? {get set}
     var interactor: PresenterToInteractorProtocol? {get set}
     var router: PresenterToRouterProtocol? {get set}
+    var cartRouter:CartListPresenterToRouterProtocol? { get set}
    
     
 }

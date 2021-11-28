@@ -11,7 +11,7 @@ class CartListViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var presenter:CartListViewToPresenterProtocol?
+    var presenter:ViewToPresenterProtocol?
     
     var dataSource = [Product]()
     
@@ -41,7 +41,7 @@ extension CartListViewController{
     }
 }
 
-extension CartListViewController:CartListPresenterToViewProtocol{
+extension CartListViewController:PresenterToViewProtocol{
     
     func showProductList(products: [Product]) {
         
@@ -55,6 +55,15 @@ extension CartListViewController:CartListPresenterToViewProtocol{
         
     }
     
+    
+    
+    func showLoadingIndicator() {
+        
+    }
+    
+    func hideLoadingIndicator() {
+        
+    }
     
     
 }

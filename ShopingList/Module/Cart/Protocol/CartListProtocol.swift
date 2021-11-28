@@ -13,32 +13,3 @@ protocol CartListPresenterToRouterProtocol:class{
     
 }
 
-protocol CartListViewToPresenterProtocol:class{
-    
-    var interactor:CartListPresenterToInteractorProtocol? {get set}
-    var router:CartListPresenterToRouterProtocol? {get set}
-    var view:CartListPresenterToViewProtocol? {get set}
-    func fetchCartListProduct()
-}
-
-protocol CartListPresenterToViewProtocol:class{
-    
-    func showProductList(products:[Product])
-    func showErrorMessage(message:String)
-    func sendAllDataReceivedStatus(status:Bool)
-    
-    
-}
-
-protocol CartListPresenterToInteractorProtocol:class{
-    var presenter:CartListInteractorToPresenterProtocol? {get set}
-    func fetchCartListProduct()
-    
-}
-
-protocol CartListInteractorToPresenterProtocol:class{
-    
-    func sendProducts(products:[Product])
-    func sendFailureMessage(message:String)
-    func sendAllDataReceivedStatus(status:Bool)
-}
