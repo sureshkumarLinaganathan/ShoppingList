@@ -89,7 +89,7 @@ final class DataBaseManager:NSObject{
 extension DataBaseManager{
     
     
-    func saveProduct(product:Product){
+    func    saveProduct(product:Product){
         
         
         var arr:[CDProduct] = []
@@ -115,8 +115,32 @@ extension DataBaseManager{
         }
         coreDataManager.save()
         
+    }
+    
+    
+}
+
+
+extension DataBaseManager{
+    
+    func fetchCartListProduct()->[Product]{
         
+        let predicate = NSPredicate(format:"isAddedToCart  == %d",true)
+        let arr:[CDProduct] = fetchData(forentity:"CDProduct", predicate:predicate)!
+        var products = [Product]()
+        for obj in arr{
+            
+            var product = Product()
+            product.id = obj.id
+            product.name = obj.name
+            product.description = obj.prodDes
+            product.price = obj.price
+            product.isAddedToCart = obj.isAddedToCart
+            product.image = obj.image
+            products.append(product)
+        }
         
+        return products
         
     }
 }

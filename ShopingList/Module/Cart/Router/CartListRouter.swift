@@ -15,7 +15,7 @@ class CartListRouter:CartListPresenterToRouterProtocol{
         let view = mainstoryboard.instantiateViewController(withIdentifier: "CartListControllerID") as! CartListViewController
         
         let presenter: ViewToPresenterProtocol & InteractorToPresenterProtocol = ProductListPresenter()
-        let interactor: PresenterToInteractorProtocol = ProductListInteractor()
+        let interactor: PresenterToInteractorProtocol = ProductListInteractor(serviceProvider:DatabaseServiceProvider())
         let router:CartListPresenterToRouterProtocol = CartListRouter()
         
         view.presenter = presenter

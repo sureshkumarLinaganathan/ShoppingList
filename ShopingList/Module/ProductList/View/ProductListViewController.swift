@@ -123,6 +123,8 @@ extension ProductListViewController:UICollectionViewDataSource{
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier:ProductCollectionViewCell.identifier, for:indexPath) as! ProductCollectionViewCell
             cell.setupView(product:dataSources[indexPath.row])
+            cell.addCartDelegate = self
+            cell.showAddCartOption()
             return cell
         }
     }
@@ -197,7 +199,7 @@ extension ProductListViewController:LoadingIndicatorProtocol{
     }
 }
 
-extension ProductListViewController:ProductCollectionViewCellProtocol{
+extension ProductListViewController:AddCartOptionProtocol{
     
     func didTapCartButton(cell: ProductCollectionViewCell) {
         
@@ -208,6 +210,8 @@ extension ProductListViewController:ProductCollectionViewCellProtocol{
         var product = dataSources[indexPath.row ]
         product.isAddedToCart = true
         presentor?.addProductToDatabase(product:product)
-        
     }
+    
+    
+    
 }

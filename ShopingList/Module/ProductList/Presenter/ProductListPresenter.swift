@@ -11,6 +11,10 @@ import UIKit
 class ProductListPresenter:ViewToPresenterProtocol{
     
     
+    
+    
+    
+    
     var view: PresenterToViewProtocol?
     
     var interactor: PresenterToInteractorProtocol?

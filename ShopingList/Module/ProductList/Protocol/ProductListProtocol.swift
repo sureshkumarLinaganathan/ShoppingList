@@ -23,6 +23,7 @@ protocol SaveProductToDatabaseProtocol {
 protocol FetchProductProtocol {
     
     func fetchProduct(limit:Int,skip:Int)
+    
 }
 
 protocol TransitionProtocol{

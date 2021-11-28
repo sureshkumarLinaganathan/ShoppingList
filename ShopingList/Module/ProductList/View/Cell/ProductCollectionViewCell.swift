@@ -9,9 +9,14 @@ import UIKit
 import SDWebImage
 
 
-protocol ProductCollectionViewCellProtocol:class{
+protocol AddCartOptionProtocol:class{
     
     func didTapCartButton(cell:ProductCollectionViewCell)
+}
+
+protocol RemoveCartOptionProtocol:class{
+    
+    func didTappedRemoveCartButton(cell:ProductCollectionViewCell)
 }
 
 class ProductCollectionViewCell: UICollectionViewCell {
@@ -27,8 +32,10 @@ class ProductCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var productDesLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var cartButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
     
-    weak var delegate:ProductCollectionViewCellProtocol?
+    weak var addCartDelegate:AddCartOptionProtocol?
+    weak var removeCartDelegate:RemoveCartOptionProtocol?
     
     func setupView(product:Product){
         
@@ -65,11 +72,26 @@ class ProductCollectionViewCell: UICollectionViewCell {
         
     }
     
-    @IBAction func addToCartButtonTapped(_ sender: Any) {
+    func showRemoveCartOption(){
         
-        self.delegate?.didTapCartButton(cell:self)
+        deleteButton.isHidden = false
+        cartButton.isHidden = true
     }
     
+    func showAddCartOption(){
+        
+        deleteButton.isHidden = true
+        cartButton.isHidden = false
+    }
+    
+    @IBAction func addToCartButtonTapped(_ sender: Any) {
+        
+        self.addCartDelegate?.didTapCartButton(cell:self)
+    }
+    
+    @IBAction func deleteButtonTapped(_ sender: Any) {
+        self.removeCartDelegate?.didTappedRemoveCartButton(cell:self)
+    }
 }
 
 extension ProductCollectionViewCell{

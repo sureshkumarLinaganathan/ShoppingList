@@ -9,6 +9,8 @@ import Foundation
 
 class ProductListInteractor:PresenterToInteractorProtocol{
     
+    
+    
     var presenter: InteractorToPresenterProtocol?
     private var serviceProvider:ProductListServiceProviderProtocol?
     
