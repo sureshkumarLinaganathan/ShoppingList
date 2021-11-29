@@ -146,7 +146,7 @@ extension CartListViewController:UICollectionViewDataSource{
             
             if (!isPaginationServiceRunning){
                 
-                fetchProducts(pageSize:pageSize, skip:skip)
+                fetchProducts(pageSize:pageSize, skip:skip+pageSize)
             }
             
             return cell

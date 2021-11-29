@@ -162,7 +162,7 @@ extension ProductListViewController:UICollectionViewDataSource{
             
             if (!isPaginationServiceRunning){
                 
-                fetchProductList(pageSize:pageSize, skip:skip)
+                fetchProductList(pageSize:pageSize, skip:skip+pageSize)
             }
             
             return cell
@@ -221,7 +221,6 @@ extension ProductListViewController:PresenterToViewProtocol{
     
     func showProductList() {
         
-        skip = skip+pageSize
         isPaginationServiceRunning = false
         isRefreshingEnabled = false
         collectionView.reloadData()
