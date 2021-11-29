@@ -11,10 +11,6 @@ import UIKit
 class ProductListPresenter:ViewToPresenterProtocol{
     
     
-    
-    
-    
-    
     var view: PresenterToViewProtocol?
     
     var interactor: PresenterToInteractorProtocol?
@@ -38,22 +34,44 @@ class ProductListPresenter:ViewToPresenterProtocol{
         interactor?.addProductToDatabase(product:product)
     }
     
+    func  getProductCount() -> Int? {
+        
+        return interactor?.dataSources.count
+    }
+    
+    func getProduct(for index: Int) -> Product? {
+        
+        return interactor?.dataSources[index]
+        
+    }
+    
+    func getFailureMessage() -> String? {
+        
+        return interactor?.message
+    }
+    
+    func removeProduct(for index: Int) {
+        
+        interactor?.dataSources.remove(at:index)
+    }
+    
 }
 
 extension ProductListPresenter:InteractorToPresenterProtocol{
+    
     func sendAllDataReceivedStatus(status: Bool) {
         
         view?.sendAllDataReceivedStatus(status:status)
     }
     
-    func sendProducts(products: [Product]) {
+    func productFetched() {
         
-        view?.showProductList(products:products)
+        view?.showProductList()
     }
     
-    func sendFailureMessage(message: String) {
+    func productFetchedFailure() {
         
-        view?.showErrorMessage(message:message)
+        view?.showErrorMessage()
     }
 }
 

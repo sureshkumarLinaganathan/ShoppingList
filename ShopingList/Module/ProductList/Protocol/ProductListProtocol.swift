@@ -43,27 +43,35 @@ protocol ViewToPresenterProtocol: class,TransitionProtocol,FetchProductProtocol,
     var interactor: PresenterToInteractorProtocol? {get set}
     var router: PresenterToRouterProtocol? {get set}
     var cartRouter:CartListPresenterToRouterProtocol? { get set}
+    
+    func getProductCount()->Int?
+    func getProduct(for index:Int)->Product?
+    func getFailureMessage()->String?
+    func removeProduct(for index:Int)
    
     
 }
 
 protocol PresenterToViewProtocol: class,LoadingIndicatorProtocol{
     
-    func showProductList(products:[Product])
-    func showErrorMessage(message:String)
+    func showProductList()
+    func showErrorMessage()
     func sendAllDataReceivedStatus(status:Bool)
+    
 }
 
 protocol PresenterToInteractorProtocol: class,FetchProductProtocol,SaveProductToDatabaseProtocol {
     
     var presenter:InteractorToPresenterProtocol? {get set}
+    var dataSources:[Product] { get set}
+    var message:String? { get}
     
 }
 
 protocol InteractorToPresenterProtocol: class,LoadingIndicatorProtocol {
     
-    func sendProducts(products:[Product])
-    func sendFailureMessage(message:String)
+    func productFetched()
+    func productFetchedFailure()
     func sendAllDataReceivedStatus(status:Bool)
 }
 

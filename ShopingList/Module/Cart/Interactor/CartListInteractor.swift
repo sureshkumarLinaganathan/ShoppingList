@@ -1,22 +1,23 @@
 //
-//  ProductListInteractor.swift
+//  CartListInteractor.swift
 //  ShopingList
 //
-//  Created by Sureshkumar Linganathan on 27/11/21.
+//  Created by Sureshkumar Linganathan on 29/11/21.
 //
 
 import Foundation
 
-class ProductListInteractor:PresenterToInteractorProtocol{    
+class CartListInteractor:PresenterToInteractorProtocol{
     
     var presenter: InteractorToPresenterProtocol?
+    
+    var dataSources: [Product] = []
+    
+    var message: String?
+    
     private var serviceProvider:ProductListServiceProviderProtocol?
     
-    var dataSources:[Product] = []
-    
-    var message:String?
-    
-    init(serviceProvider:ProductListServiceProviderProtocol = ServiceProvider()) {
+    init(serviceProvider:ProductListServiceProviderProtocol = DatabaseServiceProvider()) {
         
         self.serviceProvider = serviceProvider
     }
@@ -38,10 +39,10 @@ class ProductListInteractor:PresenterToInteractorProtocol{
             self?.presenter?.sendAllDataReceivedStatus(status: (products.count == 0 || products.count<limit) ? true:false)
             
             self?.dataSources.append(contentsOf: products)
-            
             self?.presenter?.productFetched()
-            self?.saveProductInDatabase(products:products)
+            
         }, failureCallback: { [weak self](message) in
+            
             self?.message = message
             self?.presenter?.productFetchedFailure()
             self?.hideLoadingIndicator(hide:skip<limit)
@@ -51,7 +52,7 @@ class ProductListInteractor:PresenterToInteractorProtocol{
     
 }
 
-extension ProductListInteractor{
+extension CartListInteractor{
     
     private func showLoadingIndicator(show:Bool){
         
@@ -70,18 +71,15 @@ extension ProductListInteractor{
 }
 
 
-extension ProductListInteractor{
-    
-    private func saveProductInDatabase(products:[Product]){
-        
-        for product in products{
-            
-            addProductToDatabase(product: product)
-        }
-    }
+extension CartListInteractor{
     
     func addProductToDatabase(product: Product) {
         
         DataBaseManager.sharedInstance.saveProduct(product:product)
     }
 }
+
+
+
+
+

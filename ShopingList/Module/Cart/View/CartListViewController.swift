@@ -15,12 +15,26 @@ class CartListViewController: UIViewController {
     var presenter:ViewToPresenterProtocol?
     
     private var loadingIndicator = LoadingIndicator()
-    var dataSources = [Product](){
+    
+    private var productCount:Int{
         
-        didSet{
-            collectionView.reloadData()
+        guard let count = presenter?.getProductCount() else{
+            
+            return 0
         }
+        
+        return count
     }
+    
+    private var failureMsg:String{
+        
+        guard let msg = presenter?.getFailureMessage() else{
+            
+            return ""
+        }
+        return msg
+    }
+    
     private let pageSize = 10
     private var skip = 0
     private let CELL_INSET = 10
@@ -32,7 +46,7 @@ class CartListViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         fetchProducts(pageSize:pageSize, skip:skip)
-        showMessageLabel(show:dataSources.count == 0)
+        showMessageLabel(show:productCount == 0)
     }
 }
 
@@ -83,15 +97,14 @@ extension CartListViewController{
 
 extension CartListViewController:PresenterToViewProtocol{
     
-    func showProductList(products: [Product]) {
+    func showProductList() {
         
         skip = skip+pageSize
         isPaginationServiceRunning = false
-        dataSources.append(contentsOf: products)
     }
     
-    func showErrorMessage(message: String) {
-        showAlert(message:message)
+    func showErrorMessage() {
+        showAlert(message:failureMsg)
     }
     
     func sendAllDataReceivedStatus(status: Bool) {
@@ -117,15 +130,15 @@ extension CartListViewController:LoadingIndicatorProtocol{
 extension CartListViewController:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if dataSources.count > 0 && !isAllDataReceived{
-            return  dataSources.count+1
+        if productCount > 0 && !isAllDataReceived{
+            return  productCount+1
         }
-        return dataSources.count
+        return productCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if indexPath.row == dataSources.count && !isAllDataReceived{
+        if indexPath.row == productCount && !isAllDataReceived{
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier:PaginationCollectionViewCell.identifier, for:indexPath) as! PaginationCollectionViewCell
             cell.setupView()
@@ -141,7 +154,7 @@ extension CartListViewController:UICollectionViewDataSource{
         }else{
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier:ProductCollectionViewCell.identifier, for:indexPath) as! ProductCollectionViewCell
-            cell.setupView(product:dataSources[indexPath.row])
+            cell.setupView(product:(presenter?.getProduct(for:indexPath.row))!)
             cell.showRemoveCartOption()
             cell.removeCartDelegate = self
             return cell
@@ -156,7 +169,7 @@ extension CartListViewController:UICollectionViewDelegateFlowLayout{
         
         let spacing = CGFloat((2 * CELL_INSET)/numberOfColumns)
         
-        if indexPath.row == dataSources.count && !isAllDataReceived{
+        if indexPath.row == productCount && !isAllDataReceived{
             
             let cellSize = CGSize(width: (collectionView.bounds.width - spacing), height:PaginationCollectionViewCell.height)
             return cellSize
@@ -190,11 +203,11 @@ extension CartListViewController:RemoveCartOptionProtocol{
             return
         }
         
-        var product = dataSources[indexPath.row ]
-        product.isAddedToCart = false
-        presenter?.addProductToDatabase(product:product)
-        dataSources.remove(at:indexPath.row)
-        showMessageLabel(show:dataSources.count == 0)
+        let product = (presenter?.getProduct(for:indexPath.row))!
+        updateProduct(product:product)
+        presenter?.removeProduct(for:indexPath.row)
+        showMessageLabel(show:productCount == 0)
+        collectionView.reloadData()
     }
     
     private func showMessageLabel(show:Bool){
@@ -205,6 +218,12 @@ extension CartListViewController:RemoveCartOptionProtocol{
             messageLabel.isHidden = true
         }
         
+    }
+    
+    private func updateProduct(product:Product){
+        var obj = product
+        obj.isAddedToCart = false
+        presenter?.addProductToDatabase(product:obj)
     }
 }
 

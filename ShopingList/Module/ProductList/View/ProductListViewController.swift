@@ -22,6 +22,25 @@ class ProductListViewController: UIViewController {
     private var isPaginationServiceRunning = false
     private let numberOfColumns = 1
     
+    private var productCount:Int{
+        
+        guard let count = presentor?.getProductCount() else{
+            
+            return 0
+        }
+        
+        return count
+    }
+    
+    private var failureMsg:String{
+        
+        guard let msg = presentor?.getFailureMessage() else{
+            
+            return ""
+        }
+        return msg
+    }
+    
     var isAllDataReceived = false
     var isRefreshingEnabled = false{
         
@@ -32,19 +51,12 @@ class ProductListViewController: UIViewController {
             }
         }
     }
-    var dataSources = [Product](){
-        
-        didSet{
-            collectionView.reloadData()
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         fetchProductList(pageSize:pageSize, skip:skip)
     }
-    
 }
 
 
@@ -131,15 +143,18 @@ extension ProductListViewController{
 extension ProductListViewController:UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if dataSources.count > 0 && !isAllDataReceived{
-            return  dataSources.count+1
+        
+        if productCount > 0 && !isAllDataReceived{
+            return  productCount+1
         }
-        return dataSources.count
+        return productCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if indexPath.row == dataSources.count && !isAllDataReceived{
+        
+        
+        if indexPath.row == productCount && !isAllDataReceived{
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier:PaginationCollectionViewCell.identifier, for:indexPath) as! PaginationCollectionViewCell
             cell.setupView()
@@ -155,7 +170,7 @@ extension ProductListViewController:UICollectionViewDataSource{
         }else{
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier:ProductCollectionViewCell.identifier, for:indexPath) as! ProductCollectionViewCell
-            cell.setupView(product:dataSources[indexPath.row])
+            cell.setupView(product:(presentor?.getProduct(for:indexPath.row))!)
             cell.addCartDelegate = self
             cell.showAddCartOption()
             return cell
@@ -170,7 +185,7 @@ extension ProductListViewController:UICollectionViewDelegateFlowLayout{
         
         let spacing = CGFloat((2 * CELL_INSET)/numberOfColumns)
         
-        if indexPath.row == dataSources.count && !isAllDataReceived{
+        if indexPath.row == productCount && !isAllDataReceived{
             
             let cellSize = CGSize(width: (collectionView.bounds.width - spacing), height:PaginationCollectionViewCell.height)
             return cellSize
@@ -204,17 +219,17 @@ extension ProductListViewController:PresenterToViewProtocol{
     }
     
     
-    func showProductList(products: [Product]) {
+    func showProductList() {
         
         skip = skip+pageSize
         isPaginationServiceRunning = false
-        dataSources.append(contentsOf: products)
         isRefreshingEnabled = false
+        collectionView.reloadData()
     }
     
-    func showErrorMessage(message: String) {
+    func showErrorMessage() {
         
-        showAlert(message:message)
+        showAlert(message:failureMsg)
     }
     
 }
@@ -233,6 +248,7 @@ extension ProductListViewController:LoadingIndicatorProtocol{
     }
 }
 
+
 extension ProductListViewController:AddCartOptionProtocol{
     
     func didTapCartButton(cell: ProductCollectionViewCell) {
@@ -241,9 +257,9 @@ extension ProductListViewController:AddCartOptionProtocol{
             return
         }
         
-        var product = dataSources[indexPath.row ]
-        product.isAddedToCart = true
-        presentor?.addProductToDatabase(product:product)
+        var product = presentor?.getProduct(for:indexPath.row)
+        product?.isAddedToCart = true
+        presentor?.addProductToDatabase(product:product!)
     }
     
     
