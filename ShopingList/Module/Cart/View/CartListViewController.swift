@@ -30,7 +30,10 @@ class CartListViewController: UIViewController {
     private var skip = 0
     private let CELL_INSET = 10
     private var isPaginationServiceRunning = false
-    private var isAllDataReceived = false
+    private var isAllDataReceived: Bool{
+        
+        return presenter?.getAllDataReceivedStatus() ?? false
+    }
     private let numberOfColumns = 1
     
     override func viewDidLoad() {
@@ -98,10 +101,6 @@ extension CartListViewController:PresenterToViewProtocol{
         showAlert(message:failureMsg)
     }
     
-    func sendAllDataReceivedStatus(status: Bool) {
-        isAllDataReceived = status
-    }
-    
 }
 
 
@@ -136,10 +135,10 @@ extension CartListViewController:UICollectionViewDataSource{
             cell.startAnimation()
             
             if (!isPaginationServiceRunning){
+                isPaginationServiceRunning = true
                 skip = skip+pageSize
                 fetchProducts(pageSize:pageSize, skip:skip)
             }
-            
             return cell
             
         }else{

@@ -51,14 +51,18 @@ class ProductListInteractor:PresenterToInteractorProtocol{
             self?.isAllDataReceived = (products.count == 0 || products.count<limit) ? true:false
             
             self?.dataSources.append(contentsOf: products)
-            
-            self?.presenter?.productFetched()
+            DispatchQueue.main.async {
+                self?.presenter?.productFetched()
+            }
             self?.saveProductInDatabase(products:products)
         }, failureCallback: { [weak self](message) in
             self?.message = message
-            self?.presenter?.productFetchedFailure()
-            self?.hideLoadingIndicator(hide:skip<limit)
             self?.isAllDataReceived = false
+            DispatchQueue.main.async{
+                self?.presenter?.productFetchedFailure()
+            }
+            self?.hideLoadingIndicator(hide:skip<limit)
+            
         })
     }
     
