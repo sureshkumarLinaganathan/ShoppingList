@@ -9,11 +9,10 @@ import Foundation
 
 class ProductListInteractor:PresenterToInteractorProtocol{
     
-    
-    
     var presenter: InteractorToPresenterProtocol?
     private var serviceProvider:ProductListServiceProviderProtocol?
-    
+    var dataSources:[Product] = []
+    var message:String?
     init(serviceProvider:ProductListServiceProviderProtocol = ServiceProvider()) {
         
         self.serviceProvider = serviceProvider
@@ -33,10 +32,11 @@ class ProductListInteractor:PresenterToInteractorProtocol{
             }
             
             self?.presenter?.sendAllDataReceivedStatus(status: (products.count == 0 || products.count<limit) ? true:false)
+            self?.dataSources.append(contentsOf: products)
             self?.presenter?.sendProducts(products:products)
             self?.saveProductInDatabase(products:products)
         }, failureCallback: { [weak self](message) in
-            
+            self?.message = message
             self?.presenter?.sendFailureMessage(message:message)
             self?.hideLoadingIndicator(hide:skip<limit)
             self?.presenter?.sendAllDataReceivedStatus(status: false)
