@@ -1,8 +1,8 @@
 //
 //  MockService.swift
-//  GitHub AppTests
+//  ShopingListTests
 //
-//  Created by Sureshkumar Linganathan on 29/10/21.
+//  Created by Sureshkumar Linganathan on 29/11/21.
 //
 
 import Foundation
@@ -31,8 +31,6 @@ class MockServices:ProductListServiceProviderProtocol {
             
         case .failureWithOutMsg:
             failureCallback("")
-        case .loadingIndicatorStatus:
-            successCallback(true,[] as AnyObject)
         default:
             failureCallback("Request Time out")
         }
@@ -48,7 +46,6 @@ enum MockApiResponseType {
     case failure
     case successWithEmptyData
     case failureWithOutMsg
-    case loadingIndicatorStatus
     case reloadStatus
     case timeOut
 }
