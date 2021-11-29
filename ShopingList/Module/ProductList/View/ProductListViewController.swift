@@ -161,8 +161,8 @@ extension ProductListViewController:UICollectionViewDataSource{
             cell.startAnimation()
             
             if (!isPaginationServiceRunning){
-                
-                fetchProductList(pageSize:pageSize, skip:skip+pageSize)
+                skip = skip+pageSize
+                fetchProductList(pageSize:pageSize, skip:skip)
             }
             
             return cell

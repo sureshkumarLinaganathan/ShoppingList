@@ -37,6 +37,9 @@ class ApiManager {
                 
                 var  objs = Parser.decode(data:arr, type:[Product].self) as! [Product]
                 objs = sliceProducts(products:objs, skip:skip, limit:limit)
+                if objs.count == 0 {
+                    objs = DataBaseManager.sharedInstance.fetchCartListProduct(limit:limit, skip:skip,fetctCartProduct:false)
+                }
                 DispatchQueue.main.async {
                     successCallback(success,objs as AnyObject)
                 }
@@ -49,9 +52,20 @@ class ApiManager {
             }
             
         }, failureCallback: { (msg) in
-            DispatchQueue.main.async {
-                failureCallback(msg)
+            
+            let objs = DataBaseManager.sharedInstance.fetchCartListProduct(limit:limit, skip:skip,fetctCartProduct:false)
+            
+            if objs.count == 0{
+                DispatchQueue.main.async {
+                    failureCallback(msg)
+                }
+            }else{
+                DispatchQueue.main.async {
+                    successCallback(true,objs as AnyObject)
+                }
             }
+            
+            
         })
     }
     

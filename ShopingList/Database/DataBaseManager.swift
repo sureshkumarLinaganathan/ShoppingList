@@ -125,9 +125,12 @@ extension DataBaseManager{
 
 extension DataBaseManager{
     
-    func fetchCartListProduct(limit:Int,skip:Int)->[Product]{
+    func fetchCartListProduct(limit:Int,skip:Int,fetctCartProduct:Bool)->[Product]{
+        var predicate:NSPredicate?
         
-        let predicate = NSPredicate(format:"isAddedToCart  == %d",true)
+        if fetctCartProduct{
+          predicate = NSPredicate(format:"isAddedToCart  == %d",fetctCartProduct)
+        }
         let arr:[CDProduct] = fetchData(forentity:"CDProduct", predicate:predicate,limit:limit,skip:skip)!
         var products = [Product]()
         for obj in arr{

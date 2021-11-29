@@ -145,8 +145,8 @@ extension CartListViewController:UICollectionViewDataSource{
             cell.startAnimation()
             
             if (!isPaginationServiceRunning){
-                
-                fetchProducts(pageSize:pageSize, skip:skip+pageSize)
+                skip = skip+pageSize
+                fetchProducts(pageSize:pageSize, skip:skip)
             }
             
             return cell

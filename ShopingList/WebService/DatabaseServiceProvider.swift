@@ -12,7 +12,7 @@ class DatabaseServiceProvider:ProductListServiceProviderProtocol{
     func fetchProducts(limit:Int,skip:Int,successCallback: @escaping successCallback, failureCallback: @escaping failureCallback) {
         
         
-        let products =  DataBaseManager.sharedInstance.fetchCartListProduct(limit:limit, skip:skip)
+        let products =  DataBaseManager.sharedInstance.fetchCartListProduct(limit:limit, skip:skip,fetctCartProduct:true)
         successCallback(true,products as AnyObject)
         
     }
