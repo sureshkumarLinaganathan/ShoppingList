@@ -10,6 +10,7 @@ import UIKit
 class CartListViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var messageLabel: UILabel!
     
     var presenter:ViewToPresenterProtocol?
     
@@ -31,6 +32,7 @@ class CartListViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         fetchProducts(pageSize:pageSize, skip:skip)
+        showMessageLabel(show:dataSources.count == 0)
     }
 }
 
@@ -192,7 +194,17 @@ extension CartListViewController:RemoveCartOptionProtocol{
         product.isAddedToCart = false
         presenter?.addProductToDatabase(product:product)
         dataSources.remove(at:indexPath.row)
-        collectionView.reloadData()
+        showMessageLabel(show:dataSources.count == 0)
+    }
+    
+    private func showMessageLabel(show:Bool){
+        
+        if show{
+            messageLabel.isHidden = false
+        }else{
+            messageLabel.isHidden = true
+        }
+        
     }
 }
 

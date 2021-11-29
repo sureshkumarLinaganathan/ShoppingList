@@ -73,6 +73,12 @@
                                     <outlet property="delegate" destination="b8k-fa-mY3" id="o0J-w4-Lwg"/>
                                 </connections>
                             </collectionView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Product available!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QeZ-Ih-Mfv">
+                                <rect key="frame" x="59.5" y="270.5" width="201.5" height="27.5"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="20"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lMb-8m-gwo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -80,16 +86,19 @@
                             <constraint firstItem="DRh-TI-L3d" firstAttribute="top" secondItem="lMb-8m-gwo" secondAttribute="top" id="88E-lc-4mD"/>
                             <constraint firstAttribute="bottom" secondItem="DRh-TI-L3d" secondAttribute="bottom" id="Uyg-Ar-Zzc"/>
                             <constraint firstItem="DRh-TI-L3d" firstAttribute="leading" secondItem="lMb-8m-gwo" secondAttribute="leading" id="W1q-GG-9mm"/>
+                            <constraint firstItem="QeZ-Ih-Mfv" firstAttribute="centerY" secondItem="Cnx-06-9jk" secondAttribute="centerY" id="dE2-VF-JmN"/>
+                            <constraint firstItem="QeZ-Ih-Mfv" firstAttribute="centerX" secondItem="Cnx-06-9jk" secondAttribute="centerX" id="f3d-Q5-RXo"/>
                             <constraint firstAttribute="trailing" secondItem="DRh-TI-L3d" secondAttribute="trailing" id="ioU-0Y-jl0"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="DRh-TI-L3d" id="lZG-ao-b2g"/>
+                        <outlet property="messageLabel" destination="QeZ-Ih-Mfv" id="VLB-fX-6jI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Q8-6c-luJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="818" y="-10"/>
+            <point key="canvasLocation" x="817.5" y="-10.56338028169014"/>
         </scene>
     </scenes>
     <resources>
