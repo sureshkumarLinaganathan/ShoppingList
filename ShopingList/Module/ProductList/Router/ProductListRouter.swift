@@ -14,8 +14,8 @@ class ProductListRouter:PresenterToRouterProtocol{
         
         let view = mainstoryboard.instantiateViewController(withIdentifier: "ProductListControllerID") as! ProductListViewController
         
-        let presenter: ViewToPresenterProtocol & InteractorToPresenterProtocol & LoadingIndicatorProtocol = ProductListPresenter()
-        let interactor: PresenterToInteractorProtocol = ProductListInteractor()
+        let presenter: ViewToPresenterProtocol & InteractorToPresenterProtocol  = ProductListPresenter()
+        let interactor: PresenterToInteractorProtocol = ProductListInteractor(serviceProvider:ServiceProvider(), fallbackServiceProvider:ProductatDabaseServiceProvider())
         let router:PresenterToRouterProtocol = ProductListRouter()
         
         view.presentor = presenter

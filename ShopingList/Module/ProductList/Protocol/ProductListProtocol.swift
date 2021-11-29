@@ -47,16 +47,14 @@ protocol ViewToPresenterProtocol: class,TransitionProtocol,FetchProductProtocol,
     func getProductCount()->Int?
     func getProduct(for index:Int)->Product?
     func getFailureMessage()->String?
-    func removeProduct(for index:Int)
-   
-    
+    func remove(product:Product)
+    func getAllDataReceivedStatus()->Bool?
 }
 
 protocol PresenterToViewProtocol: class,LoadingIndicatorProtocol{
     
     func showProductList()
     func showErrorMessage()
-    func sendAllDataReceivedStatus(status:Bool)
     
 }
 
@@ -65,6 +63,8 @@ protocol PresenterToInteractorProtocol: class,FetchProductProtocol,SaveProductTo
     var presenter:InteractorToPresenterProtocol? {get set}
     var dataSources:[Product] { get set}
     var message:String? { get}
+    func remove(product: Product)
+    var isAllDataReceived:Bool { get set}
     
 }
 
@@ -72,7 +72,6 @@ protocol InteractorToPresenterProtocol: class,LoadingIndicatorProtocol {
     
     func productFetched()
     func productFetchedFailure()
-    func sendAllDataReceivedStatus(status:Bool)
 }
 
 

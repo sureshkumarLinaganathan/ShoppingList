@@ -50,19 +50,19 @@ class ProductListPresenter:ViewToPresenterProtocol{
         return interactor?.message
     }
     
-    func removeProduct(for index: Int) {
+    func remove(product: Product) {
         
-        interactor?.dataSources.remove(at:index)
+        interactor?.remove(product:product)
+    }
+    
+    func getAllDataReceivedStatus()->Bool?{
+        
+        return interactor?.isAllDataReceived
     }
     
 }
 
 extension ProductListPresenter:InteractorToPresenterProtocol{
-    
-    func sendAllDataReceivedStatus(status: Bool) {
-        
-        view?.sendAllDataReceivedStatus(status:status)
-    }
     
     func productFetched() {
         

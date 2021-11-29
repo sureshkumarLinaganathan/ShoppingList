@@ -41,7 +41,11 @@ class ProductListViewController: UIViewController {
         return msg
     }
     
-    var isAllDataReceived = false
+    var isAllDataReceived:Bool{
+        
+        presentor?.getAllDataReceivedStatus() ?? false
+    }
+    
     var isRefreshingEnabled = false{
         
         willSet{
@@ -212,13 +216,7 @@ extension ProductListViewController:UICollectionViewDelegateFlowLayout{
 }
 
 extension ProductListViewController:PresenterToViewProtocol{
-    
-    func sendAllDataReceivedStatus(status: Bool) {
-        
-        isAllDataReceived = status
-    }
-    
-    
+
     func showProductList() {
         
         isPaginationServiceRunning = false

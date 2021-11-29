@@ -9,6 +9,9 @@ import Foundation
 
 class CartListInteractor:PresenterToInteractorProtocol{
     
+    var isAllDataReceived: Bool = false
+    
+    
     var presenter: InteractorToPresenterProtocol?
     
     var dataSources: [Product] = []
@@ -35,9 +38,7 @@ class CartListInteractor:PresenterToInteractorProtocol{
                 self?.presenter?.productFetchedFailure()
                 return
             }
-            
-            self?.presenter?.sendAllDataReceivedStatus(status: (products.count == 0 || products.count<limit) ? true:false)
-            
+            self?.isAllDataReceived = (products.count == 0 || products.count<limit) ? true:false
             self?.dataSources.append(contentsOf: products)
             self?.presenter?.productFetched()
             
@@ -46,9 +47,22 @@ class CartListInteractor:PresenterToInteractorProtocol{
             self?.message = message
             self?.presenter?.productFetchedFailure()
             self?.hideLoadingIndicator(hide:skip<limit)
-            self?.presenter?.sendAllDataReceivedStatus(status: false)
+            self?.isAllDataReceived = false
         })
     }
+    
+    func remove(product: Product) {
+        
+        guard  let index = dataSources.firstIndex(where: { $0.id == product.id }) else {
+            
+            return
+        }
+        dataSources.remove(at:index)
+        
+        addProductToDatabase(product:product)
+    }
+    
+    
     
 }
 
@@ -77,6 +91,7 @@ extension CartListInteractor{
         
         DataBaseManager.sharedInstance.saveProduct(product:product)
     }
+    
 }
 
 

@@ -7,26 +7,39 @@
 
 import Foundation
 
-class ProductListInteractor:PresenterToInteractorProtocol{    
+class ProductListInteractor:PresenterToInteractorProtocol{
+    
+    var isAllDataReceived: Bool = false
+    func remove(product: Product) {
+        
+    }
     
     var presenter: InteractorToPresenterProtocol?
-    private var serviceProvider:ProductListServiceProviderProtocol?
-    
+    private var serviceProvider:ProductListServiceProviderProtocol
+    private var fallbackServiceProvider:ProductListServiceProviderProtocol?
     var dataSources:[Product] = []
     
     var message:String?
     
-    init(serviceProvider:ProductListServiceProviderProtocol = ServiceProvider()) {
+    init(serviceProvider:ProductListServiceProviderProtocol = ServiceProvider(),fallbackServiceProvider:ProductListServiceProviderProtocol? = nil) {
         
         self.serviceProvider = serviceProvider
+        self.fallbackServiceProvider = fallbackServiceProvider
     }
+    
     
     func fetchProduct(limit: Int, skip: Int) {
         
+        let isInternetAvailable = ConnectionManager.shared.hasConnectivity()
+        var serviceLayer:ProductListServiceProviderProtocol = serviceProvider
         
+        if !isInternetAvailable , let fallbackService = fallbackServiceProvider{
+            
+            serviceLayer = fallbackService
+        }
         showLoadingIndicator(show:skip<limit)
         
-        self.serviceProvider?.fetchProducts(limit:limit, skip:skip,successCallback: { [weak self](success,response) in
+        serviceLayer.fetchProducts(limit:limit, skip:skip,successCallback: { [weak self](success,response) in
             self?.hideLoadingIndicator(hide:skip<limit)
             guard let products = response as? [Product] else{
                 
@@ -35,7 +48,7 @@ class ProductListInteractor:PresenterToInteractorProtocol{
                 return
             }
             
-            self?.presenter?.sendAllDataReceivedStatus(status: (products.count == 0 || products.count<limit) ? true:false)
+            self?.isAllDataReceived = (products.count == 0 || products.count<limit) ? true:false
             
             self?.dataSources.append(contentsOf: products)
             
@@ -45,7 +58,7 @@ class ProductListInteractor:PresenterToInteractorProtocol{
             self?.message = message
             self?.presenter?.productFetchedFailure()
             self?.hideLoadingIndicator(hide:skip<limit)
-            self?.presenter?.sendAllDataReceivedStatus(status: false)
+            self?.isAllDataReceived = false
         })
     }
     

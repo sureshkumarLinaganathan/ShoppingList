@@ -18,21 +18,12 @@ class CartListViewController: UIViewController {
     
     private var productCount:Int{
         
-        guard let count = presenter?.getProductCount() else{
-            
-            return 0
-        }
-        
-        return count
+        return presenter?.getProductCount() ?? 0
     }
     
     private var failureMsg:String{
         
-        guard let msg = presenter?.getFailureMessage() else{
-            
-            return ""
-        }
-        return msg
+        return presenter?.getFailureMessage() ?? ""
     }
     
     private let pageSize = 10
@@ -99,8 +90,8 @@ extension CartListViewController:PresenterToViewProtocol{
     
     func showProductList() {
         
-        skip = skip+pageSize
         isPaginationServiceRunning = false
+        collectionView.reloadData()
     }
     
     func showErrorMessage() {
@@ -199,13 +190,11 @@ extension CartListViewController:RemoveCartOptionProtocol{
     
     func didTappedRemoveCartButton(cell: ProductCollectionViewCell) {
         
-        guard let indexPath = collectionView.indexPath(for:cell) else{
+        guard let indexPath = collectionView.indexPath(for:cell), let product = presenter?.getProduct(for:indexPath.row) else{
             return
         }
         
-        let product = (presenter?.getProduct(for:indexPath.row))!
-        updateProduct(product:product)
-        presenter?.removeProduct(for:indexPath.row)
+        delete(product:product)
         showMessageLabel(show:productCount == 0)
         collectionView.reloadData()
     }
@@ -220,10 +209,10 @@ extension CartListViewController:RemoveCartOptionProtocol{
         
     }
     
-    private func updateProduct(product:Product){
+    private func delete(product:Product){
         var obj = product
         obj.isAddedToCart = false
-        presenter?.addProductToDatabase(product:obj)
+        presenter?.remove(product:obj)
     }
 }
 
